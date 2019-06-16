@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Grab AI Challenge</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        header {
+            text-align: center;
+        }
+        
+        .Title {
+            font-size: 3em;
+            color: green;
+            border-style: dashed;
+        }
+        
+        div {
+            font-size: 20px;
+            text-align: center;
+            color: green;
+        }
+        
+        .AnalyzeButton {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #39D2B4;
+            color: #fff;
+            font-size: 1em;
+            transition: all .4s;
+            cursor: pointer;
+        }
+        
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #35f34f;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: fixed;
+            top: -120%;
+            right: -100%;
+            left: -100%;
+            bottom: -100%;
+            margin: auto;
+            z-index: 0;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+</head>
+
+<header>
+    <p class='Title'>
+        Grab AI Challenge-Computer Vision
+    </p>
+</header>
+
+<body>
+    <div>
+        <form id="UploadImages" method="POST" enctype="multipart/form-data">
+            <strong>Choose your car images</strong>
+            <br>
+            <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg" multiple>
+        </form>
+    </div>
+
+    <div>
+        <button type="button" class="AnalyzeButton" id="PredictButton">Analyze</button>
+    </div>
+
+    <div class="loader" style="display:none;"></div>
+
+    <div>
+        <p id="result"></p>
+    </div>
+</body>
+
+<footer>
+    <script type=text/javascript>
+        $('#PredictButton').click(function() {
+            var form_data = new FormData($('#UploadImages')[0]);
+            $('.loader').show();
+
+            $.ajax({
+                type: 'POST',
+                url: '/analyze',
+                data: form_data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                async: true,
+                success: function(data) {
+                    // Get and display the result
+                    $('.loader').hide();
+                    $('#result').text(' Result:  ' + data);
+                },
+                error: function() {
+                    $('.loader').hide();
+                    alert("Please upload at least one image before proceed");
+                },
+            });
+        });
+    </script>
+</footer>
+
+</html>
