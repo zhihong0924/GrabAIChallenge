@@ -1,6 +1,5 @@
 #from waitress import serve
 from flask import Flask, render_template,request, send_from_directory
-from scipy.misc import imsave, imread, imresize
 import re
 import sys 
 import os
