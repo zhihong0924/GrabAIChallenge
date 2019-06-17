@@ -1,9 +1,10 @@
 # GrabAIChallenge
 # Overview
 This project is designed for Grab AI Challenge to detect the make, model and year of a car.
+
 Dataset for training can be obtained from here: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
 
-This program is successfully executed by Python 3.6.7 and Python 3.7.3.
+This program is successfully executed on Python 3.6.x and above
 
 # How to run this program
 1. Change directory to the working directory.
